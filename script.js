@@ -44,9 +44,18 @@ const updateCounterTag = (value, element) => {
     element.textContent = value;
 }
 
-// setup event listener for the buttons
+/**
+ * 
+ * @param {HTMLElement} element the element to attach the eventlistener to
+ * @param {string} event the type of event
+ * @param {()=>{}} action function to run when the event is fired
+ * @returns a function to remove said event from the event list
+ */
 const setupEventListener = (element, event, action) => {
     element.addEventListener(event, ()=> action());
+    return () => {
+        element.removeEventListener(event, action);
+    }
 }
 
 
