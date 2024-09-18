@@ -3,7 +3,7 @@ export function reducer(state, action) {
     const {type, payload} = action;
 
     switch (type) {
-        case 'INCREMENT':
+        case 'ADD':
             return {...state, counter: state.counter + 1};
         case 'DECREMENT':
             return {...state, counter: state.counter - 1};
