@@ -44,8 +44,8 @@ export const createStore = (initialState, reducer) => {
 
     // updates the state of the store using the supplied action and reducer callback
     const update = (action) => {
-        const prev = state[0];
-        const next = reducer(prev, action);
+        const prev = Object.freeze({...state[0]});// insuring users cant manipulate the state
+        const next = Object.freeze({...reducer(prev, action)});
         state.unshift(next);
 
         if (state.length > 3) {
@@ -54,7 +54,7 @@ export const createStore = (initialState, reducer) => {
     }
 
     /**
-     * 
+     * Subscribes to state changes
      * @param {Subscriber} callback
      * @returns {Unsubscribe} a function that removes the subscribed callback
      */
