@@ -48,7 +48,9 @@ export const createStore = (initialState, reducer) => {
         const next = reducer(prev, action);
         state.unshift(next);
 
-        // TODO: check length of state history and remove last state if list to big
+        if (state.length > 3) {
+            state.pop();
+        }
     }
 
     /**
@@ -71,6 +73,8 @@ export const createStore = (initialState, reducer) => {
     const getState = () => {
         return state[0];
     }
+
+    //TODO: Implement a undo function
 
     return {
         dispatch,

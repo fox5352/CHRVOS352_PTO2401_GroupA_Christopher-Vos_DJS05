@@ -15,6 +15,12 @@ const tags = {
     removeSubscribeBtn : document.getElementById("remove-subscriber")
 }
 
+store.subscribe(function(state) {
+    console.log("subscriber function trigger at update");
+    console.log("state is :", state);
+    
+})
+
 console.log("SCENARIO 1: Initial State Verification");
 console.log("GETS STATE");
 console.log(`initial state is :${initialState.counter}`);
