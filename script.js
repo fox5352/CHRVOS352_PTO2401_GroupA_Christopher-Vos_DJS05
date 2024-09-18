@@ -5,11 +5,15 @@ const initialState = {
     counter: 0
 }
 
-
 const store = createStore(initialState, reducer);
 
-// TODO: SUBTRACT
-// TODO: RESET
+const tags = {
+    counter : document.getElementById("counter"),
+    addBtn : document.getElementById("add"),
+    subtractBtn : document.getElementById("subtract"),
+    resetBtn : document.getElementById("reset"),
+    removeSubscribeBtn : document.getElementById("remove-subscriber")
+}
 
 console.log("SCENARIO 1: Initial State Verification");
 console.log("GETS STATE");
@@ -41,3 +45,26 @@ console.log("Dispatch RESET counter should be 0");
 store.dispatch({ type: "RESET" });
 console.log(`state from store: ${store.getState().counter}`);
 
+
+const unSubscriber = store.subscribe(function(state) {
+    console.log("subscriber function trigger at update");
+    
+
+    tags.counter.textContent = state.counter;
+})
+
+tags.addBtn.addEventListener("click", ()=> {
+    store.dispatch({ type: 'ADD' });
+});
+
+tags.subtractBtn.addEventListener("click", ()=> {
+    store.dispatch({ type: 'SUBTRACT' });
+});
+
+tags.resetBtn.addEventListener("click", ()=> {
+    store.dispatch({ type: 'RESET' });
+});
+
+tags.removeSubscribeBtn.addEventListener("click", ()=> {
+    unSubscriber();
+});
