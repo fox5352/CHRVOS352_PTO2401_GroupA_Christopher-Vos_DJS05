@@ -75,6 +75,9 @@ export const createStore = (initialState, reducer) => {
     }
 
     //TODO: Implement a undo function
+    //TODO: Implement a replace reducer function for hot reloading functionally
+
+    dispatch({ type: '@@INIT' });// set up initial state on subscriber's callback
 
     return {
         dispatch,
