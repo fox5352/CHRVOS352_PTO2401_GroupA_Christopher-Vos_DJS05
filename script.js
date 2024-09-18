@@ -1,14 +1,6 @@
 import { reducer } from "./reducer.js"
 import { createStore }  from "./store.js"
 
-// Pure function to get DOM elements
-const getDomElements = () => ({
-    counter: document.getElementById("counter"),
-    addBtn: document.getElementById("add"),
-    subtractBtn: document.getElementById("subtract"),
-    resetBtn: document.getElementById("reset"),
-    removeSubscribeBtn: document.getElementById("remove-subscriber")
-});
 
 // Pure function to create action creators
 const createActionCreators = () => ({
@@ -24,6 +16,7 @@ const logState = (message, getState) => {
     console.log("");
 };
 
+// Pure function to run scenarios
 const runScenarios = (store) => {
     const { getState, dispatch } = store;
     const actions = createActionCreators();
@@ -44,16 +37,37 @@ const runScenarios = (store) => {
     logState("After resetting", getState);
 }
 
+// Extras ----------------------------------------------------------------
 
+// update the counter tag
 const updateCounterTag = (value, element) => {
     element.textContent = value;
 }
 
+// setup event listener for the buttons
 const setupEventListener = (element, event, action) => {
     element.addEventListener(event, ()=> action());
 }
 
+
+// Pure function to get DOM elements
+const getDomElements = () => ({
+    counter: document.getElementById("counter"),
+    addBtn: document.getElementById("add"),
+    subtractBtn: document.getElementById("subtract"),
+    resetBtn: document.getElementById("reset"),
+    removeSubscribeBtn: document.getElementById("remove-subscriber")
+});
+
+// main ----------------------------------------------------------------
 function main(){
+    const initialState = { counter: 0 }
+    const store = createStore(initialState, reducer);
+
+    runScenarios(store);
+
+    // Extras ----------------------------------------------------------------
+    
     const { 
         counter, 
         addBtn, 
@@ -62,12 +76,6 @@ function main(){
         removeSubscribeBtn 
     } = getDomElements();
     const actions = createActionCreators();
-
-    const initialState = { counter: 0 }
-
-    const store = createStore(initialState, reducer);
-
-    runScenarios(store);
     
     const unSubscribe = store.subscribe((state)=> updateCounterTag(state.counter, counter));
 
