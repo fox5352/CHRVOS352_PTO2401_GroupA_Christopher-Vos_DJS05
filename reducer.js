@@ -5,7 +5,7 @@ export function reducer(state, action) {
     switch (type) {
         case 'ADD':
             return {...state, counter: state.counter + 1};
-        case 'DECREMENT':
+        case 'SUBTRACT':
             return {...state, counter: state.counter - 1};
         case "RESET":
             return {...state, counter: 0};

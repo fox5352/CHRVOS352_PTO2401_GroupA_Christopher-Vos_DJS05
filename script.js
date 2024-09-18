@@ -16,6 +16,8 @@ console.log("GETS STATE");
 console.log(`initial state is :${initialState.counter}`);
 console.log(`state from store is :${store.getState().counter}`);
 
+console.log("");
+
 console.log("SCENARIO 2: Incrementing the Counter");
 console.log("Dispatch ADD once");
 store.dispatch({ type: 'ADD' });
@@ -23,5 +25,19 @@ console.log("Dispatch ADD again state counter should be 2 now");
 store.dispatch({ type: 'ADD' });
 console.log(`state from store: ${store.getState().counter}`);
 
+console.log("");
 
+console.log("SCENARIO 3: Decrementing the Counter");
+console.log(`state from store: ${store.getState().counter}`);
+console.log("Dispatch SUBTRACT once state counter should be 1");
+store.dispatch({type: "SUBTRACT"});
+console.log(`state from store: ${store.getState().counter}`);
+
+console.log("");
+
+console.log("SCENARIO 4: Resetting the Counter");
+console.log(`state from store: ${store.getState().counter}`);
+console.log("Dispatch RESET counter should be 0");
+store.dispatch({ type: "RESET" });
+console.log(`state from store: ${store.getState().counter}`);
 
