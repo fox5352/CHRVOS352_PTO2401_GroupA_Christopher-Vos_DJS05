@@ -16,8 +16,10 @@ const tags = {
 }
 
 store.subscribe(function(state) {
+    console.log("");
     console.log("subscriber function trigger at update");
     console.log("state is :", state);
+    console.log("");
     
 })
 
@@ -53,7 +55,7 @@ console.log(`state from store: ${store.getState().counter}`);
 
 
 const unSubscriber = store.subscribe(function(state) {
-    console.log("subscriber function trigger at update");
+    console.log("counter tag subscriber function trigger at update");
     tags.counter.textContent = state.counter;
 })
 
