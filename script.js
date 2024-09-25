@@ -54,6 +54,10 @@ function main(){
     console.log("unsubbed ");
     
     store.dispatch({type: "ADD"})
+    console.log("incremented state counter");
+    
+    console.log("after unsubscribing and incrementing state counter", store.getState().counter);
+    console.log("subscriber didn't fire");    
 }
 
 main();
