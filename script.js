@@ -19,13 +19,13 @@ const logState = (message, getState) => {
 // Pure function to run scenarios
 const runScenarios = (store) => {
     const { getState, dispatch } = store;
-    const actions = createActionCreators();
+    const actions = createActionCreators();// creates the predefined actions!!!!!!
 
     logState("SCENARIO 1: Initial State Verification", getState);
 
     logState("SCENARIO 2: Incrementing the Counter", getState);
-    dispatch(actions.add());
-    dispatch(actions.add());
+    dispatch(actions.add());// uses them
+    dispatch(actions.add());// uses them
     logState("After incrementing twice", getState);
     
     logState("SCENARIO 3: Decrementing the Counter", getState);
@@ -37,61 +37,22 @@ const runScenarios = (store) => {
     logState("After resetting", getState);
 }
 
-// Extras ----------------------------------------------------------------
-
-// update the counter tag
-const updateCounterTag = (value, element) => {
-    element.textContent = value;
-}
-
-/**
- * 
- * @param {HTMLElement} element the element to attach the eventlistener to
- * @param {string} event the type of event
- * @param {()=>{}} action function to run when the event is fired
- * @returns a function to remove said event from the event list
- */
-const setupEventListener = (element, event, action) => {
-    element.addEventListener(event, ()=> action());
-    return () => {
-        element.removeEventListener(event, action);
-    }
-}
-
-
-// Pure function to get DOM elements
-const getDomElements = () => ({
-    counter: document.getElementById("counter"),
-    addBtn: document.getElementById("add"),
-    subtractBtn: document.getElementById("subtract"),
-    resetBtn: document.getElementById("reset"),
-    removeSubscribeBtn: document.getElementById("remove-subscriber")
-});
 
 // main ----------------------------------------------------------------
 function main(){
     const initialState = { counter: 0 }
     const store = createStore(initialState, reducer);
 
-    runScenarios(store);
+    const unSub = store.subscribe((state)=> {
+        console.log("subscriber state updated:", state);
+    })
 
-    // Extras ----------------------------------------------------------------
-    
-    const { 
-        counter, 
-        addBtn, 
-        subtractBtn, 
-        resetBtn, 
-        removeSubscribeBtn 
-    } = getDomElements();
-    const actions = createActionCreators();
-    
-    const unSubscribe = store.subscribe((state)=> updateCounterTag(state.counter, counter));
+    runScenarios(store);/// runs the scenarios!!!!
 
-    setupEventListener(addBtn, "click", ()=> store.dispatch(actions.add()));
-    setupEventListener(subtractBtn, "click", ()=> store.dispatch(actions.subtract()));
-    setupEventListener(resetBtn, "click", ()=> store.dispatch(actions.reset()));
-    setupEventListener(removeSubscribeBtn, "click", ()=> unSubscribe());
+    // unsubscribing when we are done
+    unSub();
+
+    store.dispatch({type: "ADD"})
 }
 
 main();
