@@ -24,16 +24,16 @@ const runScenarios = (store) => {
     logState("SCENARIO 1: Initial State Verification", getState);
 
     logState("SCENARIO 2: Incrementing the Counter", getState);
-    dispatch(actions.add());// uses them
-    dispatch(actions.add());// uses them
+    dispatch(actions.add());// uses the action defined in function inside the dispatch function
+    dispatch(actions.add());// uses the action defined in function inside the dispatch
     logState("After incrementing twice", getState);
     
     logState("SCENARIO 3: Decrementing the Counter", getState);
-    dispatch(actions.subtract());
+    dispatch(actions.subtract());// uses the action defined in function inside the dispatch function
     logState("After decrementing once", getState);
 
     logState("SCENARIO 4: Resetting the Counter", getState);
-    dispatch(actions.reset());
+    dispatch(actions.reset());// uses the action defined in function inside the dispatch function
     logState("After resetting", getState);
 }
 
