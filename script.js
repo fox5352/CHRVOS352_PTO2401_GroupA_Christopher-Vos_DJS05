@@ -51,7 +51,8 @@ function main(){
 
     // unsubscribing when we are done
     unSub();
-
+    console.log("unsubbed ");
+    
     store.dispatch({type: "ADD"})
 }
 
