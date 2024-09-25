@@ -12,7 +12,7 @@ const createActionCreators = () => ({
 // Pure function to log state
 const logState = (message, getState) => {
     // console.log(message);
-    console.log(`${message} state from store: ${getState().counter}`);
+    console.log(`${message} Counter: ${getState().counter}`);
 };
 
 // Pure function to run scenarios
@@ -24,22 +24,21 @@ const runScenarios = (store) => {
 
     console.log("");
 
-    logState("SCENARIO 2: Incrementing the Counter", getState);
     dispatch(actions.add());// uses the action defined in function inside the dispatch function
     dispatch(actions.add());// uses the action defined in function inside the dispatch
-    logState("After incrementing twice", getState);
+    logState("SCENARIO 2: Incrementing twice the Counter ", getState);
     
     console.log("");
     
-    logState("SCENARIO 3: Decrementing the Counter", getState);
     dispatch(actions.subtract());// uses the action defined in function inside the dispatch function
-    logState("After decrementing once", getState);
+    logState("SCENARIO 3: Decrementing once the Counter", getState);
+    // logState("After decrementing once", getState);
     
     console.log("");
 
-    logState("SCENARIO 4: Resetting the Counter", getState);
     dispatch(actions.reset());// uses the action defined in function inside the dispatch function
-    logState("After resetting", getState);
+    logState("SCENARIO 4: Resetting the", getState);
+    // logState("After resetting", getState);
 }
 
 
@@ -49,7 +48,7 @@ function main(){
     const store = createStore(initialState, reducer);
 
     const unSub = store.subscribe((state)=> {
-        console.log("subscriber state updated:", state);
+        console.log("subscriber state updated Counter:", state.counter);
     })
 
     runScenarios(store);/// runs the scenarios!!!!
